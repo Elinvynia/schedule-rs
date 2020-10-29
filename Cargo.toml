@@ -1,10 +1,15 @@
 [package]
 name = "schedule-rs"
-version = "0.0.1"
+description = "A simple scheduling library inspired by Python's schedule."
+documentation = "https://docs.rs/schedule-rs"
+homepage = "https://github.com/Elinvynia/schedule-rs"
+repository = "https://github.com/Elinvynia/schedule-rs.git"
+keywords = ["schedule"]
 authors = ["Elinvynia <59487684+Elinvynia@users.noreply.github.com>"]
+readme = "README.md"
+license = "MIT/Apache-2.0"
+version = "0.0.1"
 edition = "2018"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 chrono = "0.4"
