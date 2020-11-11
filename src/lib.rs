@@ -25,32 +25,94 @@ pub struct ScheduleBuilderOne;
 impl ScheduleBuilderOne {
     pub fn minute(self) -> ScheduleBuilderTwo {
         ScheduleBuilderTwo {
-            interval: Duration::minutes(1),
+            interval: Interval::Minute(1),
             limit: None,
         }
     }
     pub fn hour(self) -> ScheduleBuilderTwo {
         ScheduleBuilderTwo {
-            interval: Duration::hours(1),
+            interval: Interval::Hour(1),
+            limit: None,
+        }
+    }
+    pub fn day(self) -> ScheduleBuilderTwo {
+        ScheduleBuilderTwo {
+            interval: Interval::Day(1),
             limit: None,
         }
     }
     pub fn week(self) -> ScheduleBuilderTwo {
         ScheduleBuilderTwo {
-            interval: Duration::weeks(1),
+            interval: Interval::Week(1),
             limit: None,
         }
     }
     pub fn month(self) -> ScheduleBuilderTwo {
         ScheduleBuilderTwo {
-            interval: Duration::days(30),
+            interval: Interval::Month(1),
             limit: None,
         }
     }
     pub fn year(self) -> ScheduleBuilderTwo {
         ScheduleBuilderTwo {
-            interval: Duration::days(365),
+            interval: Interval::Year(1),
             limit: None,
+        }
+    }
+    pub fn monday(self) -> ScheduleBuilderTwoDates {
+        ScheduleBuilderTwoDates {
+            interval: Interval::Week(1),
+            limit: None,
+            day: Weekday::Mon,
+            time: None,
+        }
+    }
+    pub fn tuesday(self) -> ScheduleBuilderTwoDates {
+        ScheduleBuilderTwoDates {
+            interval: Interval::Week(1),
+            limit: None,
+            day: Weekday::Tue,
+            time: None,
+        }
+    }
+    pub fn wednesday(self) -> ScheduleBuilderTwoDates {
+        ScheduleBuilderTwoDates {
+            interval: Interval::Week(1),
+            limit: None,
+            day: Weekday::Wed,
+            time: None,
+        }
+    }
+    pub fn thursday(self) -> ScheduleBuilderTwoDates {
+        ScheduleBuilderTwoDates {
+            interval: Interval::Week(1),
+            limit: None,
+            day: Weekday::Thu,
+            time: None,
+        }
+    }
+    pub fn friday(self) -> ScheduleBuilderTwoDates {
+        ScheduleBuilderTwoDates {
+            interval: Interval::Week(1),
+            limit: None,
+            day: Weekday::Fri,
+            time: None,
+        }
+    }
+    pub fn saturday(self) -> ScheduleBuilderTwoDates {
+        ScheduleBuilderTwoDates {
+            interval: Interval::Week(1),
+            limit: None,
+            day: Weekday::Sat,
+            time: None,
+        }
+    }
+    pub fn sunday(self) -> ScheduleBuilderTwoDates {
+        ScheduleBuilderTwoDates {
+            interval: Interval::Week(1),
+            limit: None,
+            day: Weekday::Sun,
+            time: None,
         }
     }
 }
@@ -63,38 +125,110 @@ pub struct ScheduleBuilderOnes {
 impl ScheduleBuilderOnes {
     pub fn minutes(self) -> ScheduleBuilderTwo {
         ScheduleBuilderTwo {
-            interval: Duration::minutes(self.amount.into()),
+            interval: Interval::Minute(self.amount),
             limit: None,
         }
     }
     pub fn hours(self) -> ScheduleBuilderTwo {
         ScheduleBuilderTwo {
-            interval: Duration::hours(self.amount.into()),
+            interval: Interval::Hour(self.amount),
+            limit: None,
+        }
+    }
+    pub fn days(self) -> ScheduleBuilderTwo {
+        ScheduleBuilderTwo {
+            interval: Interval::Day(self.amount),
             limit: None,
         }
     }
     pub fn weeks(self) -> ScheduleBuilderTwo {
         ScheduleBuilderTwo {
-            interval: Duration::weeks(self.amount.into()),
+            interval: Interval::Week(self.amount),
             limit: None,
         }
     }
     pub fn months(self) -> ScheduleBuilderTwo {
         ScheduleBuilderTwo {
-            interval: Duration::days((self.amount * 30).into()),
+            interval: Interval::Month(self.amount),
             limit: None,
         }
     }
     pub fn years(self) -> ScheduleBuilderTwo {
         ScheduleBuilderTwo {
-            interval: Duration::days((self.amount * 365).into()),
+            interval: Interval::Year(self.amount),
             limit: None,
+        }
+    }
+    pub fn monday(self) -> ScheduleBuilderTwoDates {
+        ScheduleBuilderTwoDates {
+            interval: Interval::Week(self.amount),
+            limit: None,
+            day: Weekday::Mon,
+            time: None,
+        }
+    }
+    pub fn tuesday(self) -> ScheduleBuilderTwoDates {
+        ScheduleBuilderTwoDates {
+            interval: Interval::Week(self.amount),
+            limit: None,
+            day: Weekday::Tue,
+            time: None,
+        }
+    }
+    pub fn wednesday(self) -> ScheduleBuilderTwoDates {
+        ScheduleBuilderTwoDates {
+            interval: Interval::Week(self.amount),
+            limit: None,
+            day: Weekday::Wed,
+            time: None,
+        }
+    }
+    pub fn thursday(self) -> ScheduleBuilderTwoDates {
+        ScheduleBuilderTwoDates {
+            interval: Interval::Week(1),
+            limit: None,
+            day: Weekday::Thu,
+            time: None,
+        }
+    }
+    pub fn friday(self) -> ScheduleBuilderTwoDates {
+        ScheduleBuilderTwoDates {
+            interval: Interval::Week(1),
+            limit: None,
+            day: Weekday::Fri,
+            time: None,
+        }
+    }
+    pub fn saturday(self) -> ScheduleBuilderTwoDates {
+        ScheduleBuilderTwoDates {
+            interval: Interval::Week(1),
+            limit: None,
+            day: Weekday::Sat,
+            time: None,
+        }
+    }
+    pub fn sunday(self) -> ScheduleBuilderTwoDates {
+        ScheduleBuilderTwoDates {
+            interval: Interval::Week(1),
+            limit: None,
+            day: Weekday::Sun,
+            time: None,
         }
     }
 }
 
+#[derive(Copy, Clone)]
+enum Interval {
+    Minute(u32),
+    Hour(u32),
+    Day(u32),
+    Week(u32),
+    Month(u32),
+    Year(u32),
+}
+
 pub struct ScheduleBuilderTwo {
-    interval: Duration,
+    interval: Interval,
     limit: Option<u64>,
 }
 
@@ -103,20 +237,75 @@ impl ScheduleBuilderTwo {
         self.limit = Some(amount)
     }
     pub fn run<F: Fn() + Send + 'static>(self, fun: F) -> Scheduled<F> {
-        let limit = self.limit.unwrap_or(u64::MAX);
         Scheduled {
-            execution_time: Utc::now() + self.interval,
+            execution_time: next_interval(self.interval),
             execution_interval: self.interval,
-            execution_amount: limit,
+            execution_limit: self.limit,
             function: fun,
         }
     }
 }
 
+pub struct ScheduleBuilderTwoDates {
+    interval: Interval,
+    limit: Option<u64>,
+    day: Weekday,
+    time: Option<NaiveTime>,
+}
+
+impl ScheduleBuilderTwoDates {
+    pub fn limit(mut self, amount: u64) {
+        self.limit = Some(amount)
+    }
+    pub fn at(mut self, time: &str) {
+        let naive_time = NaiveTime::parse_from_str(time, "%H:%M").unwrap();
+        self.time = Some(naive_time)
+    }
+    pub fn run<F: Fn() + Send + 'static>(self, fun: F) -> Scheduled<F> {
+        Scheduled {
+            execution_time: first_day_exec(self.day, self.time),
+            execution_interval: self.interval,
+            execution_limit: self.limit,
+            function: fun,
+        }
+    }
+}
+
+fn first_day_exec(day: Weekday, time: Option<NaiveTime>) -> DateTime<Utc> {
+    let now = Utc::now();
+    let current_day = now.day();
+    let current_weekday = now.weekday().number_from_monday();
+    let to_add = (current_weekday + day.number_from_monday()) % 7;
+    let with_day = Utc::now().with_day(current_day + to_add).unwrap();
+    match time {
+        Some(t) => with_day.with_hour(t.hour()).unwrap().with_minute(t.minute()).unwrap().with_second(t.second()).unwrap(),
+        None => with_day,
+    }
+}
+
+fn next_interval(i: Interval) -> DateTime<Utc> {
+    match i {
+        Interval::Minute(a) => Utc::now() + Duration::minutes(a as i64),
+        Interval::Hour(a) => Utc::now() + Duration::hours(a as i64),
+        Interval::Day(a) => Utc::now() + Duration::days(a as i64),
+        Interval::Week(a) => Utc::now() + Duration::weeks(a as i64),
+        Interval::Month(a) => {
+            let time = Utc::now();
+            let month = time.month();
+            time.with_month(month + a).unwrap()
+        },
+        Interval::Year(a) => {
+            let time = Utc::now();
+            let year = time.year();
+            time.with_year(year + a as i32).unwrap()
+        },
+    }
+}
+
 pub struct Scheduled<F: Fn() + Send + 'static> {
     execution_time: DateTime<Utc>,
-    execution_interval: Duration,
-    execution_amount: u64,
+    execution_interval: Interval,
+    execution_limit: Option<u64>,
     function: F,
 }
 
@@ -141,13 +330,18 @@ impl<F: Fn() + Send + 'static> TaskRunner<F> {
                     continue;
                 };
                 (task.function)();
-                task.execution_amount -= 1;
-                task.execution_time = current_time + task.execution_interval;
+                if let Some(x) = task.execution_limit {
+                    task.execution_limit = Some(x - 1);
+                };
+                task.execution_time = next_interval(task.execution_interval);
             }
             self.tasks = self
                 .tasks
                 .into_iter()
-                .filter(|x| x.execution_amount > 0)
+                .filter(|x| match x.execution_limit {
+                    Some(x) => x < 1,
+                    None => false,
+                })
                 .collect();
             thread::sleep(Duration::seconds(5).to_std().unwrap())
         });

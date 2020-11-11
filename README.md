@@ -3,7 +3,7 @@
 A simple scheduling library inspired by Python's `schedule`.
 
 ## Simple usage
-```
+```rust
 use schedule_rs::prelude::*;
 
 fn main() {
