@@ -178,7 +178,7 @@ impl ScheduleBuilderOne {
     }
 }
 
-/// Builder for time values of X (minutes, hours, etc).
+/// Builder for time values of more than one (minutes, hours, etc).
 #[derive(Debug, Copy, Clone)]
 pub struct ScheduleBuilderOnes {
     amount: u32,
